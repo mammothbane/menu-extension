@@ -1,0 +1,9 @@
+{
+    "name": "com.avaglir.simple_weather",
+    "description": "Simple Weather Server",
+    "path": "server.bat",
+    "type": "stdio",
+    "allowed_origins": [
+        "chrome-extension://fjgjebhmbiljbmlmleilkhoonojgkdog"
+    ]
+}

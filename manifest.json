@@ -1,0 +1,38 @@
+{
+    "manifest_version": 2,
+
+    "name": "Simple Weather",
+    "author": "Nathan Perry <avaglir@gmail.com>",
+    "version": "0.1.0",
+    "description": "Gets the current weather at your location",
+    "key": "fjgjebhmbiljbmlmleilkhoonojgkdog",
+
+    "icons": {
+        "16": "images/clear.png",
+        "32": "images/clear.png",
+        "48": "images/clear.png"
+    },
+
+    "background": {
+        "scripts": ["bg.js"],
+        "persistent": false
+    },
+
+    "permissions": [
+        "geolocation",
+        "nativeMessaging",
+        "background",
+        "alarms",
+        "storage"
+    ],
+
+    "browser_action": {
+        "default_icon": {
+            "16": "images/clear.png",
+            "32": "images/clear.png",
+            "48": "images/clear.png"
+        },
+        "default_title": "Simple Weather",
+        "default_popup": "popup.html"
+    }
+}
