@@ -5,7 +5,6 @@
     "author": "Nathan Perry <avaglir@gmail.com>",
     "version": "0.1.0",
     "description": "Gets the current weather at your location",
-    "key": "fjgjebhmbiljbmlmleilkhoonojgkdog",
 
     "icons": {
         "16": "images/clear.png",

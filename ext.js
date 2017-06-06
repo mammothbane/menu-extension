@@ -1,19 +1,35 @@
 'use strict';
 
-const STORAGE_KEY = 'weather-latest';
+function update() {
+    chrome.storage.local.get('weather', function(weather_data) {
+        let weatherDiv = document.getElementById('weather-wrap');
+        let loadingDiv = document.getElementById('loading');
 
-function updateDom() {
+        let weatherSpan = document.getElementById('weather');
+        let locSpan = document.getElementById('location');
 
-    chrome.storage.local.get(STORAGE_KEY, function(weather_data) {
-        if (weather_data.hasOwnProperty('coords')) {
-            console.log(weather_data);
+        if (weather_data.hasOwnProperty('weather')) {
+            let weather = weather_data.weather;
 
+            weatherSpan.innerHTML = Math.round(weather.temp) + '° and ' + weather.weather.toLowerCase();
+            locSpan.innerHTML = weather.loc;
 
-            document.getElementById('loading').style.display = 'none';
-            document.getElementById('weather-wrap').style.display = 'flex';
+            loadingDiv.style.display = 'none';
+            weatherDiv.style.display = 'flex';
         } else {
-            document.getElementById('loading').style.display = 'flex';
-            document.getElementById('weather-wrap').style.display = 'none';
+            weatherSpan.innerHTML = '';
+            locSpan.innerHTML = '';
+
+            loadingDiv.style.display = 'flex';
+            weatherDiv.style.display = 'none';
+
+            chrome.browserAction.setIcon({
+                path: 'images/clear-38.png',
+            });
+
+            chrome.browserAction.setBadgeText({
+                text: '',
+            });
 
             chrome.runtime.sendMessage('requestUpdate');
         }
@@ -21,11 +37,11 @@ function updateDom() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    updateDom();
+    update();
 
     chrome.storage.onChanged.addListener(function(deltas, ns) {
-        if (deltas.some(function(key) { key === STORAGE_KEY })) {
-            updateDom();
+        if (deltas.hasOwnProperty('weather')) {
+            update();
         }
     });
 });
