@@ -19,7 +19,6 @@
 
     "permissions": [
         "geolocation",
-        "nativeMessaging",
         "background",
         "alarms",
         "storage"
