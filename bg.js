@@ -1,5 +1,7 @@
 'use strict';
 
+/// This script runs in the background and polls the server for new weather data.
+
 const ALARM_NAME = 'update-weather';
 
 let sock;
@@ -17,12 +19,13 @@ function setupSock() {
 
     sock.onmessage = function(content) {
         let data = JSON.parse(content.data);
-        console.log('got message', data);
 
+        // an event fires here that notifies the popup to update (if it's open)
         chrome.storage.local.set({weather: data});
 
         let icon = 'clear';
 
+        // then update icon and badge appropriately
         switch (data.weather.toLowerCase()) {
             case 'mist':
             case 'cloudy':

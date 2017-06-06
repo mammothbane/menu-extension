@@ -1,5 +1,7 @@
 'use strict';
 
+/// This script updates the display for the popup based on what is in local storage.
+
 function update() {
     chrome.storage.local.get('weather', function(weather_data) {
         let weatherDiv = document.getElementById('weather-wrap');
@@ -17,6 +19,7 @@ function update() {
             loadingDiv.style.display = 'none';
             weatherDiv.style.display = 'flex';
         } else {
+            // just clear everything if the key isn't present; better than presenting erroneous weather data
             weatherSpan.innerHTML = '';
             locSpan.innerHTML = '';
 
